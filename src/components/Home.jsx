@@ -10,15 +10,14 @@ const Home = () => {
 
     const [pizzas, setPizzas] = useState([]);
 
-    const fetchData = async () => {
+    const getPizzas = async () => {
         const response = await fetch('http://localhost:5000/api/pizzas');
         const pizzasJson = await response.json();
         setPizzas(pizzasJson);
-        console.log(pizzasJson);
     };
 
     useEffect(() => {
-        fetchData();
+        getPizzas();
     }, []);
 
     return (
