@@ -9,8 +9,8 @@ const Login = () => {
     const contrasena = 'abc123'
 
     return (
-        <div>
-            <form action="" className='formulario'>
+        <div className='register-height'>
+            <form className='formulario'>
                 <div>
                     <label htmlFor="email">E-mail</label>
                     <input type="email" name="email" id="email" required onChange={

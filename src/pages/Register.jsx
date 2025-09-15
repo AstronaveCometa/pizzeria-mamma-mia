@@ -21,7 +21,7 @@ const Register = () => {
 
     return (
         <div className='register-height'>
-            <form action="" className='formulario'>
+            <form className='formulario'>
                 <div>
                     <label htmlFor="email">Ingrese un e-mail</label>
                     <input type="email" name="email" id="email" required onChange={
