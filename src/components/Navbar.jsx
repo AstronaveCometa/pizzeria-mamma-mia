@@ -1,8 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { CartContext } from '../contexts/CartContext';
 
 const Navbar = () => {
-  const total = 25000;
+
+  const { cart, setCart } = useContext(CartContext);
+  let total = 0;
+  cart.forEach(pizza => {
+    total += pizza.price * pizza.count;
+  })
+
   const token = true; // Simulando que el usuario está autenticado
 
   if (token) {

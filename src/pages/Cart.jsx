@@ -1,13 +1,19 @@
 import React from 'react'
-import { pizzaCart } from '../assets/pizzas.js';
-import { useState } from 'react';
+
+import { useContext } from 'react';
+import { CartContext } from '../contexts/CartContext';
 
 const Cart = () => {
-    const [cart, setCart] = useState(pizzaCart);
+    const { cart, setCart } = useContext(CartContext);
     const formateadorMoneda = new Intl.NumberFormat('es-CL', {
       style: 'currency',
       currency: 'CLP',
     });
+  let total = 0;
+  cart.forEach(pizza => {
+    total += pizza.price * pizza.count;
+  })
+
 
   return (
     <div className='cart'>
@@ -39,6 +45,7 @@ const Cart = () => {
             </li>
         ))}
       </ul>
+      <h2>Total: {total.toLocaleString("es-CL", {style:"currency", currency:"CLP"})}</h2>
     </div>
   )
 }

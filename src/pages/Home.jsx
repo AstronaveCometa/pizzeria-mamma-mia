@@ -1,12 +1,13 @@
 import React from 'react'
 import Header from '../components/Header'
+import Pizzas from '../components/Pizzas'
 
 const Home = () => {
     return (
         <>
-        <div className='register-height'>
+
             <Header />
-        </div>
+            <Pizzas />
         </>
     )
 }
