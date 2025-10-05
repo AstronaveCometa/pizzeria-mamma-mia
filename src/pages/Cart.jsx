@@ -2,17 +2,25 @@ import React from 'react'
 
 import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
+import { UserContext } from '../contexts/UserContext';
 
 const Cart = () => {
-    const { cart, setCart } = useContext(CartContext);
-    const formateadorMoneda = new Intl.NumberFormat('es-CL', {
-      style: 'currency',
-      currency: 'CLP',
-    });
+  const { cart, setCart } = useContext(CartContext);
+  const { token, setToken } = useContext(UserContext);
+  const formateadorMoneda = new Intl.NumberFormat('es-CL', {
+    style: 'currency',
+    currency: 'CLP',
+  });
   let total = 0;
   cart.forEach(pizza => {
     total += pizza.price * pizza.count;
   })
+
+  const pagar = () => {
+    alert("El pedido ha sido pagado con éxito!");
+    alert("Gracias por preferirnos, vuelva pronto!");
+    setCart([]);
+  }
 
 
   return (
@@ -22,30 +30,33 @@ const Cart = () => {
           <li key={pizza.id} className='d-flex flex-row justify-content-start align-items-center gap-3 m-3 p-3 border'>
             <img src={pizza.img} alt={pizza.name} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
             <span>Pizza {pizza.name}</span>
-            <span>{formateadorMoneda.format(pizza.price*cart[index].count)}</span>
+            <span>{formateadorMoneda.format(pizza.price * cart[index].count)}</span>
             <span>Cantidad: </span>
             <span>
-                <button className='boton-menos' onClick={
-                    () => {
-                        let carrito = [...cart];
-                        carrito[index].count = carrito[index].count - 1;
-                        if (carrito[index].count < 1) carrito.splice(index, 1);
-                        setCart(carrito);
-                    }
-                }>-</button>
-                <span> {cart[index].count} </span>
-                <button className='boton-mas' onClick={
-                    () => {
-                        let carrito = [...cart];
-                        carrito[index].count = carrito[index].count + 1;
-                        setCart(carrito);
-                    }
-                }>+</button>
+              <button className='boton-menos' onClick={
+                () => {
+                  let carrito = [...cart];
+                  carrito[index].count = carrito[index].count - 1;
+                  if (carrito[index].count < 1) carrito.splice(index, 1);
+                  setCart(carrito);
+                }
+              }>-</button>
+              <span> {cart[index].count} </span>
+              <button className='boton-mas' onClick={
+                () => {
+                  let carrito = [...cart];
+                  carrito[index].count = carrito[index].count + 1;
+                  setCart(carrito);
+                }
+              }>+</button>
             </span>
-            </li>
+          </li>
         ))}
       </ul>
-      <h2>Total: {total.toLocaleString("es-CL", {style:"currency", currency:"CLP"})}</h2>
+      <span className='row'>
+        <h2 className='col'>Total: {total.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</h2>
+        {token ? <button className='btn btn-primary col' onClick={pagar}>Pagar</button> : null}      
+      </span>
     </div>
   )
 }

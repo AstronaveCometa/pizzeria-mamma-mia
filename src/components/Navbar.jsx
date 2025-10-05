@@ -1,17 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { useContext, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from "react";
 import { CartContext } from '../contexts/CartContext';
+import { UserContext } from '../contexts/UserContext';
 
 const Navbar = () => {
 
   const { cart, setCart } = useContext(CartContext);
+  const { token, setToken } = useContext(UserContext);
+  const navigate = useNavigate();
+  const logout = () => {
+    setToken(false);
+    navigate('/login');
+  }
+
+
   let total = 0;
   cart.forEach(pizza => {
     total += pizza.price * pizza.count;
   })
-
-  const token = true; // Simulando que el usuario está autenticado
 
   if (token) {
     return (
@@ -30,7 +37,7 @@ const Navbar = () => {
                 <Link to='/profile' className="nav-link">🔓Profile</Link>
               </li>
               <li className="nav-item">
-                <Link to='/' className="nav-link">🔒Logout</Link>
+                <button className="nav-link" onClick={logout}>🔒Logout</button>
               </li>
               <li className="nav-item">
                 <Link to='/cart' className="nav-link">🛒Total: {total.toLocaleString("es-CL", {style:"currency", currency:"CLP"})}</Link>
