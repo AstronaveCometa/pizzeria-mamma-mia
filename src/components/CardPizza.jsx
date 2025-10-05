@@ -1,11 +1,14 @@
 import React from 'react'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { CartContext } from '../contexts/CartContext';
 import { PizzasContext } from '../contexts/PizzasContext';
 
 const CardPizza = (props) => {
+    const [id, setId] = useState(props.id);
     const { cart, setCart } = useContext(CartContext);
     const { pizzas, setPizzas } = useContext(PizzasContext);
+    const navigate = useNavigate();
 
     return (
         <div className="card">
@@ -21,7 +24,11 @@ const CardPizza = (props) => {
                 <p>{props.desc}</p>
                 <h2>Precio: {props.price.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</h2>
                 <div className='d-flex flex-row justify-content-around gap-3'>
-                    <span className="btn btn-secondary">Ver más...</span>
+                    <button className="btn btn-secondary"
+                        onClick={() => {
+                            navigate(`/pizza/${id}`);
+                        }}
+                    >Ver más...</button>
                     <button className="btn btn-primary"
                         onClick={
                             () => {
