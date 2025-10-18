@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 
 const Register = () => {
-        const navigate = useNavigate();
+    const navigate = useNavigate();
     const { register, error: errorContexto } = useContext(UserContext);
 
     const [email, setEmail] = useState('');
@@ -45,7 +45,7 @@ const Register = () => {
                     <label htmlFor="email">Ingrese un e-mail</label>
                     <input type="email" name="email" id="email" required onChange={
                         (e) => setEmail(e.target.value)
-                    }/>
+                    } />
                 </div>
                 <div>
                     <label htmlFor="password">Ingrese una contraseña</label>

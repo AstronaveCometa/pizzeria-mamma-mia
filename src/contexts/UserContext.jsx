@@ -71,7 +71,6 @@ const UserProvider = ({ children }) => {
 
       const response = await axios.get(`${URL_BASICA}/me`, config);
       setEmail(response.data.email);
-      console.log('Perfil obtenido:', response.data);
 
     } catch (err) {
       if (err.response && err.response.status === 401) {
