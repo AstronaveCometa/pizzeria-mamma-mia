@@ -7,12 +7,8 @@ import { UserContext } from '../contexts/UserContext';
 const Navbar = () => {
 
   const { cart, setCart } = useContext(CartContext);
-  const { token, setToken } = useContext(UserContext);
+  const { token, logout } = useContext(UserContext);
   const navigate = useNavigate();
-  const logout = () => {
-    setToken(false);
-    navigate('/login');
-  }
 
 
   let total = 0;
